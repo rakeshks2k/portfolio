@@ -55,64 +55,88 @@ overlay.addEventListener("click", testimonialsModalFunc);
 
 
 
-// custom select variables
-const select = document.querySelector("[data-select]");
+// ===== Custom Select (Stable Mobile + Desktop Filter) =====
+
+// Elements
+const selects = document.querySelectorAll("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
+const selectValues = document.querySelectorAll("[data-selecct-value]");
+const filterBtns = document.querySelectorAll("[data-filter-btn]");
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-const filterFunc = function (selectedValue) {
 
-  for (let i = 0; i < filterItems.length; i++) {
+// Toggle dropdowns
+selects.forEach(select => {
+  select.addEventListener("click", () => {
+    select.classList.toggle("active");
+  });
+});
 
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
+
+// Filter function
+function filterFunc(value) {
+
+  filterItems.forEach(item => {
+
+    if (value === "all" || value === item.dataset.category) {
+      item.classList.add("active");
     } else {
-      filterItems[i].classList.remove("active");
+      item.classList.remove("active");
     }
-
-  }
-
-}
-
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
 
   });
 
 }
 
+
+// Dropdown selection
+selectItems.forEach(item => {
+
+  item.addEventListener("click", () => {
+
+    const selectedValue = item.innerText.toLowerCase();
+
+    selectValues.forEach(value => {
+      value.innerText = item.innerText;
+    });
+
+    filterFunc(selectedValue);
+
+    // close dropdowns (important for mobile)
+    selects.forEach(select => {
+      select.classList.remove("active");
+    });
+
+  });
+
+});
+
+
+// Desktop filter buttons (safe handling)
+let lastClickedBtn = null;
+
+filterBtns.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    const selectedValue = btn.innerText.toLowerCase();
+
+    selectValues.forEach(value => {
+      value.innerText = btn.innerText;
+    });
+
+    filterFunc(selectedValue);
+
+    if (lastClickedBtn) {
+      lastClickedBtn.classList.remove("active");
+    }
+
+    btn.classList.add("active");
+    lastClickedBtn = btn;
+
+  });
+
+});
 
 
 // contact form variables
