@@ -1,48 +1,59 @@
-<<<<<<< HEAD
-Hello
-=======
-# vCard - Personal portfolio
+# Rakesh K S – Portfolio
 
-![GitHub repo size](https://img.shields.io/github/repo-size/codewithsadee/vcard-personal-portfolio)
-![GitHub stars](https://img.shields.io/github/stars/codewithsadee/vcard-personal-portfolio?style=social)
-![GitHub forks](https://img.shields.io/github/forks/codewithsadee/vcard-personal-portfolio?style=social)
-[![Twitter Follow](https://img.shields.io/twitter/follow/codewithsadee_?style=social)](https://twitter.com/intent/follow?screen_name=codewithsadee_)
-[![YouTube Video Views](https://img.shields.io/youtube/views/SoxmIlgf2zM?style=social)](https://youtu.be/SoxmIlgf2zM)
+![GitHub repo size](https://img.shields.io/github/repo-size/rakeshks2k/portfolio)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Follow-blue?logo=linkedin)](https://www.linkedin.com/in/rakeshks2k)
 
-vCard is a fully responsive personal portfolio website, responsive for all devices, built using HTML, CSS, and JavaScript.
+## Live Portfolio
+https://rakeshks2k.github.io/portfolio/
 
-## Demo
+---
 
-![vCard Desktop Demo](./website-demo-image/desktop.png "Desktop Demo")
-![vCard Mobile Demo](./website-demo-image/mobile.png "Mobile Demo")
+## Portfolio Preview
 
-## Prerequisites
+![Portfolio Preview](./assets/portfolio.png)
 
-Before you begin, ensure you have met the following requirements:
+---
 
-* [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
+## About Me
 
-## Installing vCard
+I’m **Rakesh K S**, an **Associate Product Manager based in Bengaluru, India**.
 
-To install **vCard**, follow these steps:
+I currently work on a **B2B digital signature platform**, focused on simplifying document workflows and building reliable tools that help businesses operate more efficiently.
 
-Linux and macOS:
+My work involves **product discovery, defining product strategy, prioritizing roadmaps, and collaborating closely with engineering, design, and business teams** to deliver impactful products.
 
-```bash
-sudo git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
-```
+---
 
-Windows:
+## Portfolio Highlights
 
-```bash
-git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
-```
+The portfolio includes:
 
-## Contact
+- Product case studies *(Simple TV, Rapido, Coursera, WhatsApp, LinkedIn)*
+- Product design work
+- Professional certifications
+- Work experience and education
 
-If you want to contact me you can reach me at [Twitter](https://www.x.com/codewithsadee_).
+---
 
-## License
+## Tech Stack
 
-MIT
->>>>>>> bd1c0c018e83cdbba7d3e86f8b94a4c98d5e3cc7
+The website is built using:
+
+- HTML  
+- CSS  
+- JavaScript  
+
+and is designed to be **fully responsive across devices**.
+
+---
+
+## Connect With Me
+
+**LinkedIn**  
+https://www.linkedin.com/in/rakeshks2k
+
+**Email**  
+rakesh27242@gmail.com
+
+**Location**  
+Bengaluru, Karnataka, India
