@@ -37,7 +37,7 @@
     }
     .navbar-link.nav-cert::after {
       content: "Certification";
-      color: #e6e6e6;
+      color: var(--nav-default);
       position: absolute;
       left: 50%;
       top: 50%;
@@ -46,6 +46,13 @@
       font: inherit;
       white-space: nowrap;
       z-index: 2;
+    }
+    .navbar-link.nav-cert.active::after {
+      color: var(--nav-active) !important;
+    }
+    .navbar-link.nav-cert:hover::after,
+    .navbar-link.nav-cert:focus::after {
+      color: var(--nav-hover);
     }
   </style>
 </head>
@@ -332,7 +339,7 @@
         <section class="timeline">
           <div class="title-wrapper">
             <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+              <ion-icon name="briefcase-outline"></ion-icon>
             </div>
             <h3 class="h3">Career</h3>
           </div>
