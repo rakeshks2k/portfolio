@@ -23,38 +23,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* visually replace the Blog nav label with Certification
-       Keep the button inner text as 'Blog' so the existing script can match data-page="blog" */
-    /* make navbar items evenly distributed and centered */
-    .navbar-list { justify-content: space-evenly !important; gap: 0 !important; }
-    .navbar-link { display: inline-block; min-width: 110px; text-align: center; }
-
-    .navbar-link.nav-cert {
-      color: transparent !important;
-      position: relative;
-      padding: 0 6px;
-    }
-    .navbar-link.nav-cert::after {
-      content: "Certification";
-      color: var(--nav-default);
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      font: inherit;
-      white-space: nowrap;
-      z-index: 2;
-    }
-    .navbar-link.nav-cert.active::after {
-      color: var(--nav-active) !important;
-    }
-    .navbar-link.nav-cert:hover::after,
-    .navbar-link.nav-cert:focus::after {
-      color: var(--nav-hover);
-    }
-  </style>
 </head>
 
 <body>
@@ -202,7 +170,7 @@
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link nav-cert" data-nav-link>Blog</button>
+            <button class="navbar-link" data-nav-link>Certification</button>
           </li>
 
           <li class="navbar-item">
@@ -547,7 +515,7 @@
         - #BLOG
       -->
 
-      <article class="blog" data-page="blog">
+      <article class="blog" data-page="certification">
 
         <header>
           <h2 class="h2 article-title">Certification</h2>
