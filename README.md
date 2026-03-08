@@ -21,36 +21,16 @@ My work involves **product discovery, defining product strategy, prioritizing ro
 
 ---
 
-## Work Experience and Education
+## Portfolio Sections
 
-My portfolio highlights my professional journey including:
+This portfolio website showcases my work and experience across the following sections:
 
-- Experience working as an **Associate Product Manager at Melento**
-- Building and improving **B2B SaaS products**
-- Academic background in **Electronics & Communication Engineering**
-- Strong foundation in **technology-driven problem solving**
-
----
-
-## Product and Design Case Studies
-
-The portfolio features product thinking and product design work including:
-
-- **Simple TV**
-- **Rapido**
-- **Coursera**
-- **WhatsApp**
-- **LinkedIn**
-- **Apollo Design Case Study**
-
----
-
-## Professional Certifications
-
-Certifications included in the portfolio:
-
-- **HelloPM – Product Management Certification**
-- **Google UX Design Certificate**
+- **About** – Overview of my product management approach and focus areas  
+- **Experience** – My professional experience as an Associate Product Manager  
+- **Education** – My academic background in Electronics & Communication Engineering  
+- **Portfolio** – Product and design case studies  
+- **Certifications** – Professional certifications in product management and UX design  
+- **Contact** – Ways to connect with me  
 
 ---
 
@@ -71,7 +51,7 @@ and is designed to be **fully responsive across devices**.
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
 
 **Email**  
-rakesh27242@gmail.com
+rakesh27242@gmail.com  
 
 **Location**  
 Bengaluru, Karnataka, India
