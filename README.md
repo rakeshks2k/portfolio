@@ -36,22 +36,24 @@ This portfolio website showcases my work and experience across the following sec
 
 ## Tech Stack
 
-The website is built using:
+<div align="center">
 
-- HTML  
-- CSS  
-- JavaScript  
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-and is designed to be **fully responsive across devices**.
+</div>
+
+The website is built using **HTML, CSS, and JavaScript**, and is designed to be **fully responsive across devices**.
 
 ---
 
 ## Connect With Me
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
 
-**Email**  
+### Email
 rakesh27242@gmail.com  
 
-**Location**  
+### Location
 Bengaluru, Karnataka, India
