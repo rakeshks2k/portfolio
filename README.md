@@ -1,16 +1,13 @@
 # Rakesh K S – Portfolio
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/rakeshks2k/portfolio)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Follow-blue?logo=linkedin)](https://www.linkedin.com/in/rakeshks2k)
-
-## Live Portfolio
-https://rakeshks2k.github.io/portfolio/
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Follow-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
 
 ---
 
 ## Portfolio Preview
 
-![Portfolio Preview](./assets/portfolio.png)
+![Portfolio Preview](./assets/images/portfolio.png)
 
 ---
 
@@ -24,14 +21,36 @@ My work involves **product discovery, defining product strategy, prioritizing ro
 
 ---
 
-## Portfolio Highlights
+## Work Experience and Education
 
-The portfolio includes:
+My portfolio highlights my professional journey including:
 
-- Product case studies *(Simple TV, Rapido, Coursera, WhatsApp, LinkedIn)*
-- Product design work
-- Professional certifications
-- Work experience and education
+- Experience working as an **Associate Product Manager at Melento**
+- Building and improving **B2B SaaS products**
+- Academic background in **Electronics & Communication Engineering**
+- Strong foundation in **technology-driven problem solving**
+
+---
+
+## Product and Design Case Studies
+
+The portfolio features product thinking and product design work including:
+
+- **Simple TV**
+- **Rapido**
+- **Coursera**
+- **WhatsApp**
+- **LinkedIn**
+- **Apollo Design Case Study**
+
+---
+
+## Professional Certifications
+
+Certifications included in the portfolio:
+
+- **HelloPM – Product Management Certification**
+- **Google UX Design Certificate**
 
 ---
 
@@ -49,8 +68,7 @@ and is designed to be **fully responsive across devices**.
 
 ## Connect With Me
 
-**LinkedIn**  
-https://www.linkedin.com/in/rakeshks2k
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
 
 **Email**  
 rakesh27242@gmail.com
