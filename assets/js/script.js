@@ -18,68 +18,67 @@ sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); }
 
 
 
-// ===== Custom Select (Stable Mobile + Desktop Filter) =====
+// ===== Portfolio Filter =====
 
-// Elements
-const selects = document.querySelectorAll("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValues = document.querySelectorAll("[data-selecct-value]");
-const filterBtns = document.querySelectorAll("[data-filter-btn]");
-const filterItems = document.querySelectorAll("[data-filter-item]");
+const portfolioSelect = document.querySelector("[data-portfolio-select]");
+const portfolioSelectValue = document.querySelector("[data-portfolio-select-value]");
+const portfolioFilterBtns = document.querySelectorAll("[data-portfolio-filter-btn]");
+const portfolioItems = document.querySelectorAll("[data-portfolio-item]");
 
+if (portfolioSelect) {
+  portfolioSelect.addEventListener("click", function () { elementToggleFunc(this); });
+}
 
-// Toggle dropdowns
-selects.forEach(select => {
-  select.addEventListener("click", () => {
-    select.classList.toggle("active");
+portfolioFilterBtns.forEach(btn => {
+  btn.addEventListener("click", function () {
+    const selectedValue = this.innerText.toLowerCase();
+    if (portfolioSelectValue) portfolioSelectValue.innerText = this.innerText;
+
+    portfolioItems.forEach(item => {
+      if (selectedValue === "all" || selectedValue === item.dataset.category) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
+    });
+
+    portfolioFilterBtns.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    if (portfolioSelect) portfolioSelect.classList.remove("active");
   });
 });
 
 
-// Filter function
-function filterFunc(value) {
+// ===== Certification Filter =====
 
-  filterItems.forEach(item => {
+const certSelect = document.querySelector("[data-cert-select]");
+const certSelectValue = document.querySelector("[data-cert-select-value]");
+const certFilterBtns = document.querySelectorAll("[data-cert-filter-btn]");
+const certItems = document.querySelectorAll("[data-cert-item]");
 
-    if (value === "all" || value === item.dataset.category) {
-      item.classList.add("active");
-    } else {
-      item.classList.remove("active");
-    }
-
-  });
-
+if (certSelect) {
+  certSelect.addEventListener("click", function () { elementToggleFunc(this); });
 }
 
+certFilterBtns.forEach(btn => {
+  btn.addEventListener("click", function () {
+    const selectedValue = this.innerText.toLowerCase();
+    if (certSelectValue) certSelectValue.innerText = this.innerText;
 
-filterBtns.forEach(btn => {
-
-  btn.addEventListener("click", () => {
-
-    const selectedValue = btn.innerText.toLowerCase();
-
-    selectValues.forEach(value => {
-      value.innerText = btn.innerText;
+    certItems.forEach(item => {
+      if (selectedValue === "all" || selectedValue === item.dataset.category) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
     });
 
-    filterFunc(selectedValue);
+    certFilterBtns.forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
 
-    // Remove active class from all filter buttons in the current section
-    const parentSection = btn.closest("article");
-    if (parentSection) {
-      const sectionBtns = parentSection.querySelectorAll("[data-filter-btn]");
-      sectionBtns.forEach(b => b.classList.remove("active"));
-    }
-
-    btn.classList.add("active");
-
-    // close dropdowns (important for mobile)
-    selects.forEach(select => {
-      select.classList.remove("active");
-    });
-
+    if (certSelect) certSelect.classList.remove("active");
   });
-
 });
 
 
@@ -89,18 +88,16 @@ const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
 // add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
+formInputs.forEach(input => {
+  input.addEventListener("input", function () {
     // check form validation
     if (form.checkValidity()) {
       formBtn.removeAttribute("disabled");
     } else {
       formBtn.setAttribute("disabled", "");
     }
-
   });
-}
+});
 
 // email validation
 const emailInput = document.querySelector("[name='email']");
@@ -121,34 +118,36 @@ if (emailInput && emailError) {
 
 
 // contact form submission
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  const formData = new FormData(form);
+if (form) {
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
 
-  fetch(form.action, {
-    method: form.method,
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  }).then(response => {
-    if (response.ok) {
-      form.reset();
-      formBtn.setAttribute("disabled", "");
-      formBtn.classList.add("success");
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.reset();
+        formBtn.setAttribute("disabled", "");
+        formBtn.classList.add("success");
 
-      const icon = formBtn.querySelector("ion-icon");
-      if (icon) icon.style.display = "none";
+        const icon = formBtn.querySelector("ion-icon");
+        if (icon) icon.style.display = "none";
 
-      const btnText = formBtn.querySelector("span");
-      if (btnText) btnText.innerText = "Sent \u2713";
-    } else {
+        const btnText = formBtn.querySelector("span");
+        if (btnText) btnText.innerText = "Sent \u2713";
+      } else {
+        alert("There was a problem submitting your form.");
+      }
+    }).catch(error => {
       alert("There was a problem submitting your form.");
-    }
-  }).catch(error => {
-    alert("There was a problem submitting your form.");
+    });
   });
-});
+}
 
 
 
@@ -157,21 +156,21 @@ const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+navigationLinks.forEach(link => {
+  link.addEventListener("click", function () {
+    const targetPage = this.textContent.toLowerCase().trim();
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.textContent.toLowerCase().trim() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
+    pages.forEach(page => {
+      if (targetPage === page.dataset.page) {
+        page.classList.add("active");
         window.scrollTo(0, 0);
       } else {
-        pages[i].classList.remove("active");
+        page.classList.remove("active");
       }
-    }
+    });
 
     // Handle Nav Link Active State
     navigationLinks.forEach(link => link.classList.remove("active"));
     this.classList.add("active");
-
   });
-}
+});
