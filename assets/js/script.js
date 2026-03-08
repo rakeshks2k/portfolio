@@ -75,9 +75,6 @@ selectItems.forEach(item => {
 });
 
 
-// Desktop filter buttons (safe handling)
-let lastClickedBtn = null;
-
 filterBtns.forEach(btn => {
 
   btn.addEventListener("click", () => {
@@ -90,12 +87,14 @@ filterBtns.forEach(btn => {
 
     filterFunc(selectedValue);
 
-    if (lastClickedBtn) {
-      lastClickedBtn.classList.remove("active");
+    // Remove active class from all filter buttons in the current section
+    const parentSection = btn.closest("article");
+    if (parentSection) {
+      const sectionBtns = parentSection.querySelectorAll("[data-filter-btn]");
+      sectionBtns.forEach(b => b.classList.remove("active"));
     }
 
     btn.classList.add("active");
-    lastClickedBtn = btn;
 
   });
 
@@ -120,6 +119,52 @@ for (let i = 0; i < formInputs.length; i++) {
 
   });
 }
+
+// email validation
+const emailInput = document.querySelector("[name='email']");
+const emailError = document.getElementById("email-error");
+
+if (emailInput && emailError) {
+  emailInput.addEventListener("blur", function () {
+    if (emailInput.value.trim() !== "" && !emailInput.validity.valid) {
+      emailError.innerText = "Oops! Please enter a valid email address.";
+      emailError.style.display = "block";
+    } else {
+      emailError.style.display = "none";
+    }
+  });
+}
+
+
+// contact form submission
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: form.method,
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  }).then(response => {
+    if (response.ok) {
+      form.reset();
+      formBtn.setAttribute("disabled", "");
+      formBtn.classList.add("success");
+
+      const icon = formBtn.querySelector("ion-icon");
+      if (icon) icon.style.display = "none";
+
+      const btnText = formBtn.querySelector("span");
+      if (btnText) btnText.innerText = "Sent \u2713";
+    } else {
+      alert("There was a problem submitting your form.");
+    }
+  }).catch(error => {
+    alert("There was a problem submitting your form.");
+  });
+});
 
 
 

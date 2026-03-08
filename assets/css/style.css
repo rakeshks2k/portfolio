@@ -797,6 +797,18 @@ main {
 .timeline-list {
   font-size: var(--fs-6);
   margin-left: 45px;
+  position: relative;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30px;
+  width: 1px;
+  height: 100%;
+  background: var(--timeline-line);
+  z-index: 0;
 }
 
 .timeline-item { position: relative; }
@@ -815,16 +827,6 @@ main {
   line-height: 1.6;
 }
 
-.timeline-item:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  top: -25px;
-  left: -30px;
-  width: 1px;
-  height: calc(100% + 50px);
-  background: var(--timeline-line);
-}
-
 .timeline-item::after {
   content: "";
   position: absolute;
@@ -835,6 +837,17 @@ main {
   background: var(--timeline-active-dot);
   border-radius: 50%;
   box-shadow: 0 0 0 4px var(--bg-sidebar);
+  z-index: 1;
+}
+
+.timeline-item:last-child::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -31px;
+  width: 3px;
+  height: 100%;
+  background: var(--bg-sidebar);
 }
 
 .timeline-text {
@@ -1196,6 +1209,34 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .form-input:focus:invalid { border-color: var(--status-error); }
 
+.form-label {
+  color: var(--text-primary);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.required-field {
+  color: var(--status-error);
+  display: inline;
+  margin-left: 2px;
+}
+
+.form-error {
+  color: #EF4444;
+  font-size: var(--fs-7);
+  margin-top: 5px;
+  display: none;
+}
+
+.form-btn.success:disabled,
+.form-btn.success:disabled:hover {
+  background: #10B981;
+  opacity: 1;
+  cursor: default;
+}
+
 .form-btn {
   position: relative;
   width: 100%;
@@ -1432,13 +1473,15 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .timeline-list { margin-left: 65px; }
 
-  .timeline-item:not(:last-child)::before { left: -40px; }
+  .timeline-list::before { left: -40px; }
 
   .timeline-item::after {
     height: 8px;
     width: 8px;
     left: -43px;
   }
+
+  .timeline-item:last-child::before { left: -41px; }
 
   .skills-item:not(:last-child) { margin-bottom: 25px; }
 

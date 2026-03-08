@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vCard - Personal Portfolio</title>
+  <title>Rakesh K S - Portfolio</title>
 
   <!--
     - favicon
@@ -636,30 +636,29 @@
           <h2 class="h2 article-title">Contact</h2>
         </header>
 
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.979564857624!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c2b6c7e1%3A0x7d0b7e0b7e0b7e0b!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sin!4v1647608789441!5m2!1sen!2sin"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
         <section class="contact-form">
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
-      <form action="https://formspree.io/f/mreybbpp" method="POST" class="form" data-form>
+          <form action="https://formspree.io/f/mreybbpp" method="POST" class="form" data-form>
 
             <div class="input-wrapper">
-          <input type="text" name="address" class="form-input" placeholder="Full name" data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <div class="input-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-input" required data-form-input>
+              </div>
+
+              <div class="input-group">
+                <label for="email" class="form-label">Email address <span class="required-field">*</span></label>
+                <input type="email" name="email" id="email" class="form-input" required data-form-input>
+                <p id="email-error" class="form-error"></p>
+              </div>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-        <input type="hidden" name="_subject" value="New submission from vCard Portfolio">
-        <input type="hidden" name="_next" value="#contact">
+            <div class="input-group">
+              <label for="message" class="form-label">Message <span class="required-field">*</span></label>
+              <textarea name="message" id="message" class="form-input" required data-form-input></textarea>
+            </div>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
