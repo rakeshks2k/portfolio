@@ -41,6 +41,7 @@
   --text-placeholder: #52525B;
   --text-disabled: #3F3F46;
 
+<<<<<<< HEAD
   /* Brand Accent System */
   --accent-primary: #d94100;
   --accent-hover: #e64500;
@@ -50,11 +51,23 @@
 
   /* Navigation */
   --nav-active: #fc4c00;
+=======
+  /* Navy Blue Accent System */
+  --accent-primary: #1E3A8A;
+  --accent-hover: #1D4ED8;
+  --accent-highlight: #3B82F6;
+  --accent-soft-bg: rgba(30,58,138,0.18);
+  --accent-glow: rgba(30,58,138,0.35);
+
+  /* Navigation */
+  --nav-active: #3B82F6;
+>>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
   --nav-hover: #E4E4E7;
   --nav-default: #9CA3AF;
 
   /* Icons */
   --icon-primary: #D4D4D8;
+<<<<<<< HEAD
   --icon-accent: #fc4c00;
   --icon-bg: rgba(252, 76, 0, 0.10);
   --icon-hover: #FFFFFF;
@@ -62,6 +75,15 @@
   /* Buttons */
   --btn-primary-bg: #fc4c00;
   --btn-primary-hover: #e64500;
+=======
+  --icon-accent: #3B82F6;
+  --icon-bg: rgba(59,130,246,0.10);
+  --icon-hover: #FFFFFF;
+
+  /* Buttons */
+  --btn-primary-bg: #1E3A8A;
+  --btn-primary-hover: #1D4ED8;
+>>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
   --btn-primary-text: #FFFFFF;
   --btn-secondary-bg: rgba(255,255,255,0.04);
   --btn-secondary-border: rgba(255,255,255,0.10);
@@ -70,16 +92,27 @@
   /* Inputs */
   --input-bg: #141416;
   --input-border: rgba(255,255,255,0.08);
+<<<<<<< HEAD
   --input-focus-border: #fc4c00;
   --input-focus-glow: rgba(252, 76, 0, 0.25);
+=======
+  --input-focus-border: #3B82F6;
+  --input-focus-glow: rgba(59,130,246,0.25);
+>>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
   --input-text: #F5F5F7;
   --input-placeholder: #71717A;
 
   /* Timeline */
   --timeline-line: rgba(255,255,255,0.10);
+<<<<<<< HEAD
   --timeline-dot: #d94100;
   --timeline-active-dot: #fc4c00;
   --company-highlight: #ff8c5a;
+=======
+  --timeline-dot: #1E3A8A;
+  --timeline-active-dot: #3B82F6;
+  --company-highlight: #60A5FA;
+>>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
 
   /* Status Colors */
   --status-success: #22C55E;
