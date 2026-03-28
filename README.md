@@ -1,11 +1,7 @@
 # Rakesh K S – Portfolio
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/rakeshks2k/portfolio)
-<<<<<<< HEAD
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Follow-fc4c00?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
-=======
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Follow-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
->>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
 
 ---
 
@@ -53,11 +49,7 @@ The website is built using **HTML, CSS, and JavaScript**, and is designed to be 
 
 ## Connect With Me
 
-<<<<<<< HEAD
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-fc4c00?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
-=======
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rakesh%20K%20S-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rakeshks2k)
->>>>>>> a1824ef210310812964a7e8126d67c377e71eee1
 
 ### Email
 rakesh27242@gmail.com  
