@@ -459,10 +459,15 @@ main {
 .social-item .social-link {
   color: var(--text-muted);
   font-size: 18px;
+  transition: var(--transition-1);
+  transform: translateY(0);
 }
 
 
-.social-item .social-link:hover { color: var(--text-primary); }
+.social-item .social-link:hover { 
+  color: var(--text-primary); 
+  transform: translateY(-2px);
+}
 
 
 
@@ -824,8 +829,7 @@ main {
 /* Career and Education Subtitles & Dates */
 .timeline-list .timeline-item-subtitle {
   color: #ffffff;
-  font-size: var(--fs-6);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: var(--fw-400);
   display: block;
   margin-bottom: 2px;
@@ -833,8 +837,7 @@ main {
 
 .timeline-list .timeline-item-date {
   color: #ffffff;
-  font-size: var(--fs-7);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: var(--fw-400);
   display: block;
   margin-bottom: 7px;
@@ -843,13 +846,12 @@ main {
 
 .bulleted-list {
   padding-left: 20px;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .bulleted-list li {
   list-style-type: disc;
-  margin-bottom: 4px;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 .timeline-item::after {
@@ -1167,6 +1169,15 @@ main {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
+}
+
+/* Certification Section Specific Fixes */
+.blog .project-img {
+  aspect-ratio: 16 / 9;
+}
+
+.blog .project-img img {
+  object-fit: cover;
 }
 
 
@@ -1906,13 +1917,4 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
 
-}
-
-/* Certification Section Specific Fixes */
-.blog .project-img {
-  aspect-ratio: 16 / 9;
-}
-
-.blog .project-img img {
-  object-fit: cover;
 }
