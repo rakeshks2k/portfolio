@@ -123,6 +123,13 @@ if (form) {
     e.preventDefault();
     const formData = new FormData(form);
 
+    // Prevent double submissions & show loading state
+    formBtn.setAttribute("disabled", "");
+    const btnText = formBtn.querySelector("span");
+    const originalText = btnText ? btnText.innerText : "Send Message";
+    if (btnText) btnText.innerText = "Sending...";
+    const successMsg = document.getElementById("form-success-msg");
+
     fetch(form.action, {
       method: form.method,
       body: formData,
@@ -132,19 +139,32 @@ if (form) {
     }).then(response => {
       if (response.ok) {
         form.reset();
-        formBtn.setAttribute("disabled", "");
         formBtn.classList.add("success");
 
         const icon = formBtn.querySelector("ion-icon");
         if (icon) icon.style.display = "none";
 
-        const btnText = formBtn.querySelector("span");
         if (btnText) btnText.innerText = "Sent \u2713";
+        if (successMsg) successMsg.style.display = "block";
+
+        // Reset form button and message after 5 seconds
+        setTimeout(() => {
+          if (successMsg) successMsg.style.display = "none";
+          if (btnText) btnText.innerText = originalText;
+          if (icon) icon.style.display = "block";
+          formBtn.classList.remove("success");
+          form.checkValidity() ? formBtn.removeAttribute("disabled") : null;
+        }, 5000);
+
       } else {
         alert("There was a problem submitting your form.");
+        formBtn.removeAttribute("disabled");
+        if (btnText) btnText.innerText = originalText;
       }
     }).catch(error => {
       alert("There was a problem submitting your form.");
+      formBtn.removeAttribute("disabled");
+      if (btnText) btnText.innerText = originalText;
     });
   });
 }
@@ -172,5 +192,22 @@ navigationLinks.forEach(link => {
     // Handle Nav Link Active State
     navigationLinks.forEach(link => link.classList.remove("active"));
     this.classList.add("active");
+  });
+});
+
+// Mobile touch effect for project cards
+const projectLinks = document.querySelectorAll('.project-item > a');
+
+projectLinks.forEach(link => {
+  link.addEventListener('touchstart', function() {
+    this.classList.add('touch-active');
+  }, { passive: true });
+
+  link.addEventListener('touchend', function() {
+    this.classList.remove('touch-active');
+  });
+
+  link.addEventListener('touchcancel', function() {
+    this.classList.remove('touch-active');
   });
 });
