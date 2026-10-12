@@ -42,26 +42,26 @@
   --text-disabled: #3F3F46;
 
   /* Brand Accent System */
-  --accent-primary: #d94100;
-  --accent-hover: #e64500;
-  --accent-highlight: #fc4c00;
-  --accent-soft-bg: rgba(252, 76, 0, 0.18);
-  --accent-glow: rgba(252, 76, 0, 0.35);
+  --accent-primary: #2fbf71;
+  --accent-hover: #28a862;
+  --accent-highlight: #2fbf71;
+  --accent-soft-bg: rgba(47, 191, 113, 0.18);
+  --accent-glow: rgba(47, 191, 113, 0.35);
 
   /* Navigation */
-  --nav-active: #fc4c00;
+  --nav-active: #2fbf71;
   --nav-hover: #E4E4E7;
   --nav-default: #9CA3AF;
 
   /* Icons */
   --icon-primary: #D4D4D8;
-  --icon-accent: #fc4c00;
-  --icon-bg: rgba(252, 76, 0, 0.10);
+  --icon-accent: #2fbf71;
+  --icon-bg: rgba(47, 191, 113, 0.10);
   --icon-hover: #FFFFFF;
 
   /* Buttons */
-  --btn-primary-bg: #fc4c00;
-  --btn-primary-hover: #e64500;
+  --btn-primary-bg: #2fbf71;
+  --btn-primary-hover: #28a862;
   --btn-primary-text: #FFFFFF;
   --btn-secondary-bg: rgba(255,255,255,0.04);
   --btn-secondary-border: rgba(255,255,255,0.10);
@@ -70,16 +70,16 @@
   /* Inputs */
   --input-bg: #141416;
   --input-border: rgba(255,255,255,0.08);
-  --input-focus-border: #fc4c00;
-  --input-focus-glow: rgba(252, 76, 0, 0.25);
+  --input-focus-border: #2fbf71;
+  --input-focus-glow: rgba(47, 191, 113, 0.25);
   --input-text: #F5F5F7;
   --input-placeholder: #71717A;
 
   /* Timeline */
   --timeline-line: rgba(255,255,255,0.10);
-  --timeline-dot: #d94100;
-  --timeline-active-dot: #fc4c00;
-  --company-highlight: #ff8c5a;
+  --timeline-dot: #2fbf71;
+  --timeline-active-dot: #2fbf71;
+  --company-highlight: #5dd490;
 
   /* Status Colors */
   --status-success: #22C55E;
@@ -833,21 +833,47 @@ main {
 }
 
 /* Career and Education Subtitles & Dates */
+.timeline-item-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
 .timeline-list .timeline-item-subtitle {
   color: #ffffff;
   font-size: 15px;
   font-weight: var(--fw-400);
-  display: block;
-  margin-bottom: 2px;
+}
+
+.timeline-location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(47, 191, 113, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(47, 191, 113, 0.25);
+  border-radius: 20px;
+  padding: 2px 9px 2px 6px;
+  font-size: 12px;
+  font-weight: var(--fw-500);
+  letter-spacing: 0.2px;
+  line-height: 1.6;
+}
+
+.timeline-location-badge ion-icon {
+  font-size: 12px;
+  flex-shrink: 0;
 }
 
 .timeline-list .timeline-item-date {
-  color: #ffffff;
-  font-size: 15px;
+  color: var(--text-muted);
+  font-size: 13px;
   font-weight: var(--fw-400);
   display: block;
-  margin-bottom: 7px;
-  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
 }
 
 .bulleted-list {
