@@ -64,6 +64,4 @@ The website is built using **HTML, CSS, and JavaScript**, and is designed to be 
   </a>
   <a href="mailto:rakesh27242@gmail.com">
     <img src="https://img.shields.io/badge/Email-rakesh27242%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-  <img src="https://img.shields.io/badge/Location-Bengaluru%2C%20India-2ea44f?style=for-the-badge&logo=googlemaps&logoColor=white" alt="Location" />
 </p>
