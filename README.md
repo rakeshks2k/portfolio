@@ -6,9 +6,9 @@
     <img src="https://img.shields.io/badge/LinkedIn-Follow-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
 </p>
-
+ 
 <p align="center">
-  <i>Associate Product Manager | FinTech | B2B SaaS | GenAI</i>
+  Associate Product Manager | FinTech | B2B SaaS | GenAI
 </p>
 
 ---
