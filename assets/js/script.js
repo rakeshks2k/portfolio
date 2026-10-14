@@ -181,7 +181,11 @@ navigationLinks.forEach(link => {
     const targetPage = this.textContent.toLowerCase().trim();
 
     pages.forEach(page => {
-      if (targetPage === page.dataset.page) {
+      if (
+        targetPage === page.dataset.page ||
+        (targetPage === "connect" && page.dataset.page === "contact") ||
+        (targetPage === "contact" && page.dataset.page === "connect")
+      ) {
         page.classList.add("active");
         window.scrollTo(0, 0);
       } else {
