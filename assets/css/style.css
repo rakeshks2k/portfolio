@@ -331,7 +331,7 @@ main {
   transition: var(--transition-2);
 }
 
-.sidebar.active { max-height: 445px; }
+.sidebar.active { max-height: 700px; }
 
 .sidebar-info {
   position: relative;
@@ -1498,7 +1498,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-bottom: 30px;
   }
 
-  .sidebar.active { max-height: 584px; }
+  .sidebar.active { max-height: 800px; }
 
   .sidebar-info { gap: 25px; }
 
@@ -1922,7 +1922,8 @@ textarea.form-input::-webkit-resizer { display: none; }
    * SIDEBAR
    */
 
-  .sidebar {
+  .sidebar,
+  .sidebar.active {
     position: sticky;
     top: 60px;
     max-height: max-content;
@@ -1930,6 +1931,8 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-bottom: 0;
     padding: 26px 20px;
     z-index: 1;
+    overflow: visible;
+    transition: none;
   }
 
   .sidebar-info { flex-direction: column; }
@@ -1946,8 +1949,8 @@ textarea.form-input::-webkit-resizer { display: none; }
   .info_more-btn { display: none; }
 
   .sidebar-info_more {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .contacts-list { grid-template-columns: 1fr; }

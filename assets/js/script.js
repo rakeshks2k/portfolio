@@ -16,7 +16,16 @@ const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 // sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+if (sidebarBtn) {
+  sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+}
+
+// Clean up mobile active state when switching back to desktop
+window.addEventListener("resize", function () {
+  if (window.innerWidth >= 1250 && sidebar && sidebar.classList.contains("active")) {
+    sidebar.classList.remove("active");
+  }
+});
 
 
 
