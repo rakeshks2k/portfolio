@@ -483,10 +483,6 @@ main {
 
 .contact-info address { font-style: normal; }
 
-.sidebar-info_more .separator:last-of-type {
-  margin: 20px 0 18px;
-}
-
 .social-list {
   display: flex;
   justify-content: center;
@@ -1965,11 +1961,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   .contact-info :is(.contact-link, time, address) {
     --fs-7: 13px;
     font-weight: var(--fw-300);
-  }
-
-  .separator:last-of-type {
-    margin: 22px 0 20px;
-    opacity: 1;
   }
 
   .social-list { justify-content: center; }
