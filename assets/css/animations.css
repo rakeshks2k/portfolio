@@ -56,9 +56,22 @@ article.active {
 
 
 /* ============================================================
-   3. INITIAL PAGE LOAD — sidebar slides in from the left
+   3. INITIAL PAGE LOAD — sidebar entrance
+      Mobile (<1250px): subtle vertical fade to prevent horizontal scroll glitch
+      Desktop (>=1250px): slide in from the left
    ============================================================ */
-@keyframes sidebarSlideIn {
+@keyframes sidebarFadeInMobile {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sidebarSlideInDesktop {
   from {
     opacity: 0;
     transform: translateX(-24px);
@@ -70,7 +83,13 @@ article.active {
 }
 
 .sidebar {
-  animation: sidebarSlideIn var(--dur-slow) var(--ease-out-expo) 80ms backwards;
+  animation: sidebarFadeInMobile var(--dur-slow) var(--ease-out-expo) 80ms backwards;
+}
+
+@media (min-width: 1250px) {
+  .sidebar {
+    animation: sidebarSlideInDesktop var(--dur-slow) var(--ease-out-expo) 80ms backwards;
+  }
 }
 
 
@@ -88,6 +107,17 @@ article.active {
   }
 }
 
+@keyframes btnCornerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .avatar-box {
   animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) 160ms backwards;
 }
@@ -100,13 +130,21 @@ article.active {
   animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) 310ms backwards;
 }
 
+/* Anchor details button cleanly in corner: pinned to top-right with no positional jitter */
 .info_more-btn {
-  animation: heroFadeUp var(--dur-base) var(--ease-out-expo) 380ms backwards;
+  transform-origin: top right;
+  animation: btnCornerFadeIn var(--dur-base) var(--ease-out-expo) 140ms backwards;
+  transition:
+    transform var(--dur-fast) var(--ease-out-expo),
+    background var(--dur-base) ease,
+    border-color var(--dur-base) ease,
+    box-shadow var(--dur-base) ease,
+    color var(--dur-fast) ease;
 }
 
 
 /* ============================================================
-   5. AVATAR — subtle pulse ring on load
+   5. AVATAR — subtle pulse ring on load + hover lift
    ============================================================ */
 @keyframes avatarRing {
   0%   { box-shadow: 0 0 0 0 var(--accent-glow); }
@@ -119,15 +157,17 @@ article.active {
              avatarRing 1.6s ease-out 900ms;
 }
 
-/* hover lift */
+/* hover lift only for devices supporting hover to prevent sticky mobile states */
 .avatar-box {
   transition: transform var(--dur-base) var(--ease-out-back),
               box-shadow var(--dur-base) ease;
 }
 
-.avatar-box:hover {
-  transform: scale(1.05) translateY(-3px);
-  box-shadow: 0 16px 40px rgba(47, 191, 113, 0.25);
+@media (hover: hover) {
+  .avatar-box:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 16px 40px rgba(47, 191, 113, 0.25);
+  }
 }
 
 
@@ -137,7 +177,7 @@ article.active {
 @keyframes navbarSlideUp {
   from {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -168,9 +208,14 @@ article.active {
   transition: width var(--dur-base) var(--ease-out-expo);
 }
 
-.navbar-link.active::after,
-.navbar-link:hover::after {
+.navbar-link.active::after {
   width: 20px;
+}
+
+@media (hover: hover) {
+  .navbar-link:hover::after {
+    width: 20px;
+  }
 }
 
 
@@ -261,11 +306,13 @@ article.active {
     border-color var(--dur-base) ease;
 }
 
-.service-item:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35),
-              0 0 0 1px rgba(47, 191, 113, 0.2);
-  border-color: rgba(47, 191, 113, 0.3);
+@media (hover: hover) {
+  .service-item:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35),
+                0 0 0 1px rgba(47, 191, 113, 0.2);
+    border-color: rgba(47, 191, 113, 0.3);
+  }
 }
 
 
@@ -301,10 +348,27 @@ article.active {
     box-shadow var(--dur-base) ease;
 }
 
-.project-item > a:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4),
-              0 0 0 1px rgba(47, 191, 113, 0.25);
+@media (hover: hover) {
+  .project-item > a:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(47, 191, 113, 0.25);
+  }
+
+  .project-item > a:hover img {
+    transform: scale(1.08);
+  }
+
+  .project-item > a:hover .project-item-icon-box {
+    --scale: 1;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* tactile feedback on mobile tap */
+.project-item > a:active {
+  transform: scale(0.98);
 }
 
 /* image zoom — already handled via img:hover transform, smoothed */
@@ -313,25 +377,11 @@ article.active {
               filter var(--dur-base) ease;
 }
 
-@media (hover: hover) {
-  .project-item > a:hover img {
-    transform: scale(1.08);
-  }
-}
-
 /* eye icon — spring scale in */
 .project-item-icon-box {
   transition:
     opacity   var(--dur-base) ease,
     transform var(--dur-base) var(--ease-out-back);
-}
-
-@media (hover: hover) {
-  .project-item > a:hover .project-item-icon-box {
-    --scale: 1;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
 }
 
 
@@ -369,18 +419,32 @@ article.active {
 
 
 /* ============================================================
-   12. CONTACT ITEMS IN SIDEBAR — staggered slide
+   12. CONTACT ITEMS IN SIDEBAR — staggered slide on mobile open
    ============================================================ */
-.contact-item {
-  transition:
-    opacity   var(--dur-slow) var(--ease-out-expo),
-    transform var(--dur-slow) var(--ease-out-expo);
-}
+@media (max-width: 1249px) {
+  .sidebar-info_more .contact-item,
+  .sidebar-info_more .social-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity var(--dur-base) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo);
+  }
 
-.sidebar.active .contact-item:nth-child(1) { transition-delay: 80ms;  }
-.sidebar.active .contact-item:nth-child(2) { transition-delay: 160ms; }
-.sidebar.active .contact-item:nth-child(3) { transition-delay: 240ms; }
-.sidebar.active .contact-item:nth-child(4) { transition-delay: 320ms; }
+  .sidebar.active .sidebar-info_more .contact-item,
+  .sidebar.active .sidebar-info_more .social-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sidebar.active .sidebar-info_more .contact-item:nth-child(1) { transition-delay: 80ms; }
+  .sidebar.active .sidebar-info_more .contact-item:nth-child(2) { transition-delay: 140ms; }
+  .sidebar.active .sidebar-info_more .contact-item:nth-child(3) { transition-delay: 200ms; }
+  .sidebar.active .sidebar-info_more .contact-item:nth-child(4) { transition-delay: 260ms; }
+  .sidebar.active .sidebar-info_more .social-item:nth-child(1)  { transition-delay: 300ms; }
+  .sidebar.active .sidebar-info_more .social-item:nth-child(2)  { transition-delay: 340ms; }
+  .sidebar.active .sidebar-info_more .social-item:nth-child(3)  { transition-delay: 380ms; }
+}
 
 /* icon-box micro bounce */
 .icon-box {
@@ -390,21 +454,28 @@ article.active {
     color      var(--dur-fast) ease;
 }
 
-/* Animate only when hovering directly on or near the icon box */
-.contact-item:hover .icon-box,
-.timeline .icon-box:hover {
-  transform: scale(1.15) rotate(-5deg);
-  background: var(--accent-soft-bg);
-  color: var(--text-primary);
+/* Animate only when hovering directly on or near the icon box on hover-capable devices */
+@media (hover: hover) {
+  .contact-item:hover .icon-box,
+  .timeline .icon-box:hover {
+    transform: scale(1.15) rotate(-5deg);
+    background: var(--accent-soft-bg);
+    color: var(--text-primary);
+  }
 }
 
 .timeline .icon-box {
   cursor: pointer;
 }
 
+.contact-item .icon-box:active,
+.timeline .icon-box:active {
+  transform: scale(0.95);
+}
+
 
 /* ============================================================
-   13. SOCIAL LINKS — spring hover
+   13. SOCIAL LINKS — spring hover + mobile active
    ============================================================ */
 .social-item .social-link {
   transition:
@@ -412,9 +483,15 @@ article.active {
     transform  var(--dur-base) var(--ease-out-back);
 }
 
-.social-item .social-link:hover {
-  color: var(--accent-highlight);
-  transform: translateY(-4px) scale(1.2);
+@media (hover: hover) {
+  .social-item .social-link:hover {
+    color: var(--accent-highlight);
+    transform: translateY(-4px) scale(1.2);
+  }
+}
+
+.social-item .social-link:active {
+  transform: scale(0.92);
 }
 
 
@@ -442,9 +519,11 @@ article.active {
   will-change: transform;
 }
 
-.form-btn:not(:disabled):hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(47, 191, 113, 0.35);
+@media (hover: hover) {
+  .form-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(47, 191, 113, 0.35);
+  }
 }
 
 .form-btn:not(:disabled):active {
@@ -476,23 +555,63 @@ article.active {
   transition: transform var(--dur-base) var(--ease-out-expo);
 }
 
-.filter-item button.active::after,
-.filter-item button:hover::after {
+.filter-item button.active::after {
   transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .filter-item button:hover::after {
+    transform: scaleX(1);
+  }
 }
 
 
 /* ============================================================
-   16. DETAILS (INFO MORE) BUTTON — ripple pulse on click
+   16. DETAILS (INFO MORE) BUTTON — mobile interactions & chevron rotation
    ============================================================ */
-@keyframes btnRipple {
-  from { box-shadow: 0 0 0 0 var(--accent-glow); }
-  to   { box-shadow: 0 0 0 12px transparent; }
+
+/* Hover state only on devices that truly support hover (prevents sticky green on mobile tap) */
+@media (hover: hover) {
+  .info_more-btn:hover {
+    background: var(--accent-hover);
+    color: var(--text-primary);
+    box-shadow: 0 4px 16px rgba(47, 191, 113, 0.25);
+  }
 }
 
+/* Reset mobile tap focus so button doesn't stay stuck green */
+.info_more-btn:focus:not(:focus-visible) {
+  background: var(--bg-card-elevated);
+  color: var(--accent-highlight);
+}
+
+/* Smooth, corner-anchored press feedback on touch */
 .info_more-btn:active {
-  animation: btnRipple 0.4s ease-out;
-  transform: scale(0.96);
+  transform: scale(0.95);
+  transform-origin: top right;
+  background: rgba(47, 191, 113, 0.14);
+  border-color: var(--accent-highlight);
+}
+
+/* When sidebar drawer is expanded */
+.sidebar.active .info_more-btn {
+  border-color: rgba(47, 191, 113, 0.4);
+  box-shadow: 0 0 14px rgba(47, 191, 113, 0.15);
+}
+
+/* Chevron arrow: butter-smooth rotation perfectly paced with the drawer expansion */
+.info_more-btn ion-icon {
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  transition: transform 0.45s var(--ease-out-expo);
+  will-change: transform;
+}
+
+.sidebar.active .info_more-btn ion-icon {
+  transform: rotate(180deg);
 }
 
 
@@ -570,50 +689,35 @@ html {
 
 
 /* ============================================================
-   23. LOADING SHIMMER — for images before they load
+   23. PROJECT IMAGE PLACEHOLDER
    ============================================================ */
-@keyframes shimmer {
-  0%   { background-position: -400px 0; }
-  100% { background-position:  400px 0; }
-}
-
-.project-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.04) 50%,
-    transparent 100%
-  );
-  background-size: 800px 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: inherit;
-}
-
-/* hide shimmer once image is loaded (JS adds .img-loaded) */
-.project-img.img-loaded::after {
-  display: none;
+.project-img {
+  background-color: var(--bg-card-elevated);
 }
 
 
 /* ============================================================
-   24. ABOUT TEXT — word / paragraph fade
+   24. ABOUT TEXT — graceful entrance on page activation
+       (Visible by default to prevent blank screen on mobile load)
    ============================================================ */
-.about-text p {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity   var(--dur-slow) var(--ease-out-expo),
-    transform var(--dur-slow) var(--ease-out-expo);
+@keyframes aboutTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.about-text.revealed p:nth-child(1) { transition-delay: 0ms;   opacity: 1; transform: none; }
-.about-text.revealed p:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: none; }
-.about-text.revealed p:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: none; }
+article.active .about-text p {
+  animation: aboutTextIn var(--dur-slow) var(--ease-out-expo) backwards;
+}
+
+article.active .about-text p:nth-child(1) { animation-delay: 80ms; }
+article.active .about-text p:nth-child(2) { animation-delay: 160ms; }
+article.active .about-text p:nth-child(3) { animation-delay: 240ms; }
 
 
 /* ============================================================
@@ -624,6 +728,31 @@ html {
   transition: color var(--dur-fast) ease;
 }
 
-.contact-link:hover {
+@media (hover: hover) {
+  .contact-link:hover {
+    color: var(--accent-highlight);
+  }
+}
+
+
+/* ============================================================
+   26. MOBILE FILTER SELECT DROPDOWN — smooth pop-down
+   ============================================================ */
+.select-list {
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top center;
+  transition:
+    opacity    var(--dur-base) var(--ease-out-expo),
+    transform  var(--dur-base) var(--ease-out-expo),
+    visibility var(--dur-base);
+}
+
+.filter-select.active + .select-list {
+  transform: translateY(0) scale(1);
+}
+
+.select-item button:active {
   color: var(--accent-highlight);
+  transform: translateX(4px);
+  transition: transform var(--dur-fast) ease, color var(--dur-fast) ease;
 }

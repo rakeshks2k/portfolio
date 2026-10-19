@@ -401,8 +401,14 @@ main {
   display: none;
 }
 
-.info_more-btn:hover,
-.info_more-btn:focus {
+@media (hover: hover) {
+  .info_more-btn:hover {
+    background: var(--accent-hover);
+    color: var(--text-primary);
+  }
+}
+
+.info_more-btn:focus-visible {
   background: var(--accent-hover);
   color: var(--text-primary);
 }
@@ -416,7 +422,11 @@ main {
 
 .info_more-btn ion-icon {
   font-size: 14px;
-  transition: transform var(--transition-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sidebar.active .info_more-btn ion-icon {

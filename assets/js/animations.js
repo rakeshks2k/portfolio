@@ -14,30 +14,9 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 
 /* ============================================================
-   MODULE-SCOPE HELPERS (called from multiple sections below)
-   ============================================================ */
-
-/**
- * Marks .project-img containers as img-loaded once their
- * child image is fully decoded — removes the shimmer overlay.
- */
-function wireImageLoadedState() {
-  document.querySelectorAll('.project-img img').forEach(img => {
-    const figure = img.closest('.project-img');
-    if (!figure) return;
-
-    if (img.complete && img.naturalWidth > 0) {
-      figure.classList.add('img-loaded');
-    } else {
-      img.addEventListener('load',  () => figure.classList.add('img-loaded'), { once: true });
-      img.addEventListener('error', () => figure.classList.add('img-loaded'), { once: true });
-    }
-  });
-}
-
-
-/* ============================================================
    1. INTERSECTION OBSERVER — scroll reveal engine
+      Optimized for both mobile and desktop with a positive bottom
+      margin so items reveal smoothly before scrolling into view.
    ============================================================ */
 if (!prefersReducedMotion) {
 
@@ -51,8 +30,8 @@ if (!prefersReducedMotion) {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.04,
+    rootMargin: '0px 0px 60px 0px'
   });
 
   /**
@@ -61,12 +40,6 @@ if (!prefersReducedMotion) {
    * articles get their children wired up too.
    */
   function wireRevealElements() {
-
-    // ── Article-level sections ──
-    document.querySelectorAll('.about-text').forEach(el => {
-      el.classList.add('reveal');
-      revealObserver.observe(el);
-    });
 
     // ── Expertise / service cards (staggered) ──
     document.querySelectorAll('.service-list').forEach(el => {
@@ -87,7 +60,6 @@ if (!prefersReducedMotion) {
     });
 
     // ── Project / cert cards are controlled by the filter system (display:none → block)
-    // ── Do NOT add reveal classes here — it causes a visibility flash.
     // ── Their entrance animation (projectCardIn) fires via .project-item.active CSS rule.
 
     // ── Section headers ──
@@ -113,12 +85,10 @@ if (!prefersReducedMotion) {
   document.addEventListener('DOMContentLoaded', wireRevealElements);
 
   // Also run when navigation changes the active page
-  // (we hook into nav link clicks via MutationObserver on article)
   const articleObserver = new MutationObserver((mutations) => {
     mutations.forEach(mutation => {
       if (mutation.target.classList.contains('active') &&
           mutation.attributeName === 'class') {
-        // Small delay so the article is visible before observing
         setTimeout(wireRevealElements, 60);
       }
     });
@@ -132,67 +102,12 @@ if (!prefersReducedMotion) {
 
 
 /* ============================================================
-   2. IMAGE SHIMMER — remove shimmer class once image loads
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', wireImageLoadedState);
-
-
-/* ============================================================
-   3. NAVBAR — highlight active indicator on click + scroll
-   ============================================================ */
-(function enhanceNavbar() {
-  const navLinks = document.querySelectorAll('[data-nav-link]');
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-      // Animate a quick scale pulse on click
-      this.style.transition = 'transform 120ms ease';
-      this.style.transform = 'scale(0.92)';
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          this.style.transform = '';
-        }, 120);
-      });
-    });
-  });
-})();
-
-
-/* ============================================================
-   4. SIDEBAR TOGGLE — stagger contact items on open
-   ============================================================ */
-(function enhanceSidebarToggle() {
-  const sidebarBtn = document.querySelector('[data-sidebar-btn]');
-  const sidebar = document.querySelector('[data-sidebar]');
-  if (!sidebarBtn || !sidebar) return;
-
-  sidebarBtn.addEventListener('click', () => {
-    const isOpening = sidebar.classList.contains('active');
-    const contactItems = sidebar.querySelectorAll('.contact-item');
-    const socialItems  = sidebar.querySelectorAll('.social-item');
-
-    if (isOpening) {
-      // Stagger-in contact items
-      [...contactItems, ...socialItems].forEach((item, i) => {
-        item.style.opacity   = '0';
-        item.style.transform = 'translateY(10px)';
-        setTimeout(() => {
-          item.style.transition = `opacity 300ms ease ${i * 60}ms, transform 300ms ease ${i * 60}ms`;
-          item.style.opacity   = '1';
-          item.style.transform = 'translateY(0)';
-        }, 40);
-      });
-    }
-  });
-})();
-
-
-/* ============================================================
-   5. PROJECT CARD HOVER — tilt micro-interaction (desktop)
+   2. PROJECT CARD HOVER — tilt micro-interaction (desktop only)
    ============================================================ */
 (function addCardTilt() {
   if (prefersReducedMotion) return;
-  if (window.matchMedia('(hover: none)').matches) return; // skip touch devices
+  // Strict check: enable ONLY on desktop mice/fine pointers
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
   document.querySelectorAll('.project-item > a').forEach(card => {
     const figure = card.querySelector('.project-img');
@@ -224,11 +139,11 @@ document.addEventListener('DOMContentLoaded', wireImageLoadedState);
 
 
 /* ============================================================
-   6. SERVICE CARD HOVER — accent glow cursor follow
+   3. SERVICE CARD HOVER — accent glow cursor follow (desktop only)
    ============================================================ */
 (function addServiceGlow() {
   if (prefersReducedMotion) return;
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
   document.querySelectorAll('.service-item').forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -254,7 +169,7 @@ document.addEventListener('DOMContentLoaded', wireImageLoadedState);
 
 
 /* ============================================================
-   7. FORM — floating label shimmer on focus
+   4. FORM — floating label shimmer on focus
    ============================================================ */
 (function enhanceFormInputs() {
   const inputs = document.querySelectorAll('.form-input');
@@ -279,7 +194,7 @@ document.addEventListener('DOMContentLoaded', wireImageLoadedState);
 
 
 /* ============================================================
-   8. PAGE TRANSITION & HORIZON ALIGNMENT
+   5. PAGE TRANSITION & HORIZON ALIGNMENT
       Ensure left and right columns always align on the exact same horizon
    ============================================================ */
 if ('scrollRestoration' in history) {
@@ -307,8 +222,6 @@ window.addEventListener('pageshow', () => {
 
           // Reset scroll immediately so both columns align on the exact same horizon
           window.scrollTo(0, 0);
-
-          wireImageLoadedState();
         }
       }, 30);
     });
