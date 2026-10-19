@@ -1,6 +1,10 @@
 'use strict';
 
-
+// Ensure page always loads at top so sidebar and main content align on the exact same horizon
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }

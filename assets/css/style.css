@@ -450,6 +450,8 @@ main {
 .contact-info {
   max-width: calc(100% - 46px);
   width: calc(100% - 46px);
+  min-width: 0; /* allows flex children to shrink below content size */
+  overflow: hidden;
 }
 
 .contact-title {
@@ -462,6 +464,11 @@ main {
 .contact-info :is(.contact-link, time, address) {
   color: var(--text-primary);
   font-size: var(--fs-7);
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .contact-info address { font-style: normal; }
@@ -1906,7 +1913,7 @@ textarea.form-input::-webkit-resizer { display: none; }
     max-height: max-content;
     height: 100%;
     margin-bottom: 0;
-    padding-top: 60px;
+    padding: 30px 20px;
     z-index: 1;
   }
 
@@ -1937,7 +1944,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .contact-info :is(.contact-link, time, address) {
-    --fs-7: 14px;
+    --fs-7: 13px;
     font-weight: var(--fw-300);
   }
 

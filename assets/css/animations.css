@@ -44,16 +44,14 @@
 @keyframes articleEnter {
   from {
     opacity: 0;
-    transform: translateY(18px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 article.active {
-  animation: articleEnter var(--dur-slow) var(--ease-out-expo) backwards;
+  animation: articleEnter var(--dur-base) var(--ease-out-expo) backwards;
 }
 
 
@@ -274,20 +272,24 @@ article.active {
 /* ============================================================
    10. PROJECT / CASE STUDY CARDS
    ============================================================ */
-/* Replace the abrupt scaleUp animation with a smooth entrance */
+/*
+  Flicker-free entrance: project items are display:none → block, so
+  CSS `animation` fires the moment `display` is applied. A pure
+  opacity + subtle translateY (no scale) is the smoothest approach.
+*/
 @keyframes projectCardIn {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
 .project-item.active {
-  animation: projectCardIn var(--dur-base) var(--ease-out-expo) forwards;
+  animation: projectCardIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* card hover — border glow + image lift */
@@ -388,10 +390,16 @@ article.active {
     color      var(--dur-fast) ease;
 }
 
-.contact-item:hover .icon-box {
+/* Animate only when hovering directly on or near the icon box */
+.contact-item:hover .icon-box,
+.timeline .icon-box:hover {
   transform: scale(1.15) rotate(-5deg);
   background: var(--accent-soft-bg);
   color: var(--text-primary);
+}
+
+.timeline .icon-box {
+  cursor: pointer;
 }
 
 
@@ -540,7 +548,7 @@ article.active .article-title::after {
    20. CERTIFICATION / BLOG ITEMS — same reveal as project cards
    ============================================================ */
 .blog .project-item.active {
-  animation: projectCardIn var(--dur-base) var(--ease-out-expo) forwards;
+  animation: projectCardIn 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 
@@ -609,29 +617,13 @@ html {
 
 
 /* ============================================================
-   25. CONTACT ITEM LINK — underline slide-in
+   25. CONTACT ITEM LINK — colour shift on hover
+       (No ::after underline — incompatible with overflow:hidden+ellipsis)
    ============================================================ */
 .contact-link {
-  position: relative;
-  display: inline-block;
   transition: color var(--dur-fast) ease;
-}
-
-.contact-link::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent-highlight);
-  transition: width var(--dur-base) var(--ease-out-expo);
 }
 
 .contact-link:hover {
   color: var(--accent-highlight);
-}
-
-.contact-link:hover::after {
-  width: 100%;
 }

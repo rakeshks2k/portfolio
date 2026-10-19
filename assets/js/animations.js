@@ -86,12 +86,9 @@ if (!prefersReducedMotion) {
       revealObserver.observe(el);
     });
 
-    // ── Project / cert cards ──
-    document.querySelectorAll('.project-item').forEach((el, i) => {
-      el.classList.add('reveal-scale');
-      // stagger handled by existing active-class animation
-      revealObserver.observe(el);
-    });
+    // ── Project / cert cards are controlled by the filter system (display:none → block)
+    // ── Do NOT add reveal classes here — it causes a visibility flash.
+    // ── Their entrance animation (projectCardIn) fires via .project-item.active CSS rule.
 
     // ── Section headers ──
     document.querySelectorAll('.article-title').forEach(el => {
@@ -282,65 +279,38 @@ document.addEventListener('DOMContentLoaded', wireImageLoadedState);
 
 
 /* ============================================================
-   8. PAGE TRANSITION — scroll to top with smooth fade
-      Overrides the instant scroll inside the nav handler
+   8. PAGE TRANSITION & HORIZON ALIGNMENT
+      Ensure left and right columns always align on the exact same horizon
    ============================================================ */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+window.addEventListener('pageshow', () => {
+  window.scrollTo(0, 0);
+});
+
 (function smoothPageTransition() {
   if (prefersReducedMotion) return;
 
   const navLinks = document.querySelectorAll('[data-nav-link]');
-  const pages    = document.querySelectorAll('[data-page]');
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // Find the newly active article and replay its entrance
       setTimeout(() => {
         const activePage = document.querySelector('[data-page].active');
         if (activePage) {
-          // Reset animation
           activePage.style.animation = 'none';
           void activePage.offsetWidth; // reflow
           activePage.style.animation = '';
 
-          // Scroll top
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          // Reset scroll immediately so both columns align on the exact same horizon
+          window.scrollTo(0, 0);
 
-          // Re-trigger image shimmer wire-up
           wireImageLoadedState();
         }
       }, 30);
     });
   });
-})();
-
-
-/* ============================================================
-   9. AVATAR — accent ring on every page load (CSS handles it,
-      but keep JS hook for any future interactivity)
-   ============================================================ */
-// Nothing to do here; handled entirely by CSS animations.css §5
-
-
-/* ============================================================
-   10. STAGGER PROJECT CARDS ON FILTER CHANGE
-   ============================================================ */
-(function staggerFilteredCards() {
-  if (prefersReducedMotion) return;
-
-  function restaggerCards(containerSelector) {
-    const btns = document.querySelectorAll(containerSelector);
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        setTimeout(() => {
-          const visibleCards = document.querySelectorAll('.project-item.active');
-          visibleCards.forEach((card, i) => {
-            card.style.animationDelay = `${i * 60}ms`;
-          });
-        }, 10);
-      });
-    });
-  }
-
-  restaggerCards('[data-portfolio-filter-btn]');
-  restaggerCards('[data-cert-filter-btn]');
 })();
